@@ -15,8 +15,8 @@ var _ Worker = new(DummyWorker)
 // DummyWorker dummy worker
 type DummyWorker struct{}
 
-func (c *DummyWorker) WithContext(context.Context) Worker       { return c }
-func (c *DummyWorker) Work(...WorkTarget) ([]WorkTarget, error) { return nil, nil }
+func (c *DummyWorker) WithContext(context.Context) Worker    { return c }
+func (c *DummyWorker) Work(WorkTarget) ([]WorkTarget, error) { return nil, nil }
 
 // DummyTarget dummy target
 type DummyTarget struct{ TaskToken string }
