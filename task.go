@@ -22,6 +22,16 @@ func NewTask(ctx context.Context) WorkTask {
 	}
 }
 
+func NewTaskWithToken(ctx context.Context, taskToken string) WorkTask {
+	c, cancel := context.WithCancel(ctx)
+	return &Task{
+		ctx:        c,
+		taskToken:  taskToken,
+		startTime:  time.Now(),
+		cancelFunc: cancel,
+	}
+}
+
 // Task work task
 type Task struct {
 	ctx        context.Context

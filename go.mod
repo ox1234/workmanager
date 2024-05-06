@@ -1,4 +1,4 @@
-module github.com/tr1v3r/workmanager
+module github.com/ox1234/workmanager
 
 go 1.21
 
