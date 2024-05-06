@@ -16,7 +16,7 @@ type Worker interface {
 	WithContext(context.Context) Worker
 
 	// Work worker do work
-	Work(targets ...WorkTarget) (results []WorkTarget, err error)
+	Work(targets WorkTarget) (results []WorkTarget, err error)
 }
 
 // Cacher work target cache
