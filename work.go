@@ -84,9 +84,6 @@ func (wm *WorkerManager) work(worker Worker, arg WorkTarget) (res []WorkTarget, 
 	if err != nil {
 		return nil, fmt.Errorf("work fail: %w", err)
 	}
-	for _, item := range res {
-		item.SetToken(item.Token())
-	}
 
 	return res, nil
 }

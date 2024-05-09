@@ -142,6 +142,9 @@ func wrapWork(ctx context.Context, before []StepCallback, work Work, after []Ste
 		if err != nil {
 			return nil, err
 		}
+		for _, item := range results {
+			item.SetToken(target.Token())
+		}
 		for _, call := range after {
 			results = call(ctx, target, results...)
 		}
