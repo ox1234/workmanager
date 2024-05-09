@@ -280,8 +280,6 @@ func (wm *WorkerManager) RegisterAfterCallbacks(step WorkStep, callbacks ...Step
 
 // Serve serve specifid steps, do nothing when steps == nil or len(steps) == 0
 func (wm *WorkerManager) Serve(steps ...WorkStep) {
-	log.Info("go serve step %v", steps)
-
 	wm.mu.RLock()
 	defer wm.mu.RUnlock()
 	for _, step := range steps {
