@@ -29,7 +29,7 @@ type Cacher interface {
 type WorkerConfig interface {
 	Args() map[string]any
 	Active() bool
-	ToolName() string
+	ToolName() WorkerName
 }
 
 // WorkTarget target/result

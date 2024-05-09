@@ -9,7 +9,7 @@ type DummyConfig struct{}
 
 func (c *DummyConfig) Args() map[string]any { return nil }
 func (c *DummyConfig) Active() bool         { return true }
-func (c *DummyConfig) ToolName() string     { return "dummy" }
+func (c *DummyConfig) ToolName() WorkerName { return "dummy" }
 
 var _ Worker = new(DummyWorker)
 
