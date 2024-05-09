@@ -24,3 +24,6 @@ type DummyTarget struct{ TaskToken string }
 func (t *DummyTarget) Token() string { return t.TaskToken }
 func (t *DummyTarget) Key() string   { return "" }
 func (t *DummyTarget) TTL() int      { return 1 }
+func (t *DummyTarget) SetToken(token string) {
+	t.TaskToken = token
+}

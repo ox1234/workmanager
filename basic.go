@@ -37,6 +37,8 @@ type WorkTarget interface {
 	Token() string
 	// Key return target unique key
 	Key() string
+	// SetToken set target's task token
+	SetToken(string)
 }
 
 // WorkTask work task
