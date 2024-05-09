@@ -143,7 +143,7 @@ func wrapWork(ctx context.Context, before []StepCallback, work Work, after []Ste
 			return nil, err
 		}
 		for _, call := range after {
-			results = call(ctx, results...)
+			results = call(ctx, target, results...)
 		}
 		return results, nil
 	}

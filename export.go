@@ -24,7 +24,7 @@ type (
 	StepRunner func(ctx context.Context, work Work, workTarget WorkTarget, nexts ...func(WorkTarget))
 
 	// StepCallback callback to handle result
-	StepCallback func(ctx context.Context, results ...WorkTarget) []WorkTarget
+	StepCallback func(ctx context.Context, originTarget WorkTarget, results ...WorkTarget) []WorkTarget
 )
 
 // ================================================
