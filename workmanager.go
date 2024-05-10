@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"strings"
 	"sync"
-
-	"github.com/tr1v3r/pkg/log"
 )
 
 var defaultWorkerMgr = NewWorkerManager(context.Background())
@@ -104,7 +102,7 @@ func (wm *WorkerManager) RegisterStep(current WorkStep, stepRun StepRunner, next
 		for ch := wm.getRecvChan(current); ch != nil; _ = wm.getLimiter(current).Wait(wm.ctx) {
 			select {
 			case <-wm.ctx.Done():
-				log.CtxInfo(wm.ctx, "step %s runner stopped", current)
+				log.Infof("step %s runner stopped", current)
 				return wm.ctx.Err()
 			case target := <-ch:
 				wm.run(current, func() {
@@ -312,9 +310,9 @@ func (wm *WorkerManager) RecvFrom(step WorkStep, recv <-chan WorkTarget) error {
 				return
 			case target, ok := <-recv:
 				if !ok { // channel "recv" closed
-					log.Debug("new channel for step %s is closed", step)
+					log.Debugf("new channel for step %s is closed", step)
 				} else if err := wm.Recv(step, target); err != nil { // send target
-					log.Error("send target to step %s fail: %s", step, err)
+					log.Errorf("send target to step %s fail: %s", step, err)
 				}
 			}
 		}

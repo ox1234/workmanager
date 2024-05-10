@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/tr1v3r/pkg/log"
 	"github.com/tr1v3r/pkg/pools"
 )
 
@@ -14,12 +13,12 @@ import (
 func (wm *WorkerManager) Work(target WorkTarget, configs map[WorkerName]WorkerConfig) (results []WorkTarget, err error) {
 	task := wm.GetTask(target.Token())
 	if task == nil {
-		log.Warn("task not found: token %s", target.Token())
+		log.Warnf("task not found: token %s", target.Token())
 		return
 	}
 
 	if task.IsCanceled() {
-		log.Warn("task(%s) has been canceled\ntask: %+v", task.Token(), target)
+		log.Warnf("task(%s) has been canceled\ntask: %+v", task.Token(), target)
 		return
 	}
 
@@ -46,25 +45,25 @@ func (wm *WorkerManager) Work(target WorkTarget, configs map[WorkerName]WorkerCo
 
 			build, ok := wm.workerBuilders[name]
 			if !ok {
-				log.Error("worker builder not found: %s", name)
+				log.Errorf("worker builder not found: %s", name)
 				return
 			}
 
 			// build worker with wm's context and config args
 			worker := build(task.Context(), c.Args())
 			if worker == nil {
-				log.Error("bulid worker fail: build %s got nil", name)
+				log.Errorf("bulid worker fail: build %s got nil", name)
 				return
 			}
 
 			// work
 			res, err := wm.work(worker, target)
 			if err != nil {
-				log.Warn("%s work fail: %s", name, err)
+				log.Warnf("%s work fail: %s", name, err)
 				return
 			}
 			if res == nil {
-				log.Debug("%s work on %s got nil result", name, target.Key())
+				log.Debugf("%s work on %s got nil result", name, target.Key())
 				return
 			}
 			mu.Lock()

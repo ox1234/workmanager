@@ -4,14 +4,12 @@ import (
 	"context"
 	"fmt"
 	"runtime"
-
-	"github.com/tr1v3r/pkg/log"
 )
 
 // catchPanic catch panic
 func catchPanic(ctx context.Context, format string, args ...any) {
 	if e := recover(); e != nil {
-		log.CtxError(ctx, format+": %v\n%v", append(args, e, catchStack())...)
+		log.Errorf(format+": %v\n%v", append(args, e, catchStack())...)
 	}
 }
 
